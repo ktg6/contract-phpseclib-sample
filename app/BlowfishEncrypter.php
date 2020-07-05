@@ -9,7 +9,7 @@ class BlowfishEncrypter implements EncrypterContract
 {
     protected $encrypter;
 
-    public function __construct()
+    public function __construct(string $key)
     {
         $this->encrypter = new Blowfish();
         $this->encrypter->setKey($key);
