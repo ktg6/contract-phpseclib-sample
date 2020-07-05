@@ -13,7 +13,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('encrypter', function($app) {
+            $config = $app->make('config')->get('app');
+
+            if ($tr::startsWith($key = $this->key($config), 'base64:')) {
+                $key = base64_decode(substr($key, 7));
+            }
+
+            return new BlowfishEncrypter($key);
+        });
     }
 
     /**
